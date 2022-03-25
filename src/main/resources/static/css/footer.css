@@ -1,0 +1,21 @@
+footer{
+    position: relative;
+    width: 100%;
+    padding: 0 10vw;
+    padding-bottom: 10px;
+    background: #f3f3f3;
+}
+
+.footer-content{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.footer-content .logo{
+    height: 150px;
+}
+
+.footer-title{
+    margin-top: 80px;
+}

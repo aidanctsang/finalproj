@@ -1,0 +1,16 @@
+
+.heading{
+    font-size: 20px;
+    text-transform: capitalize;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0 10vw;
+}
+
+.product-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: auto;
+    grid-row-gap: 40px;
+}

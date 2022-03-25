@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+  </head>
+  <body>
+    <header th:fragment="header">
+      <nav class="navbar">
+        <div class="nav">
+          <img src="/img/logo.png" class="brand-logo">
+          <div class="nav-items">
+              <div class="search">
+                  <input type="text" class="search-box" placeholder="search brand, product">
+                  <button class="search-btn">search</button>
+              </div>
+
+          <div class="dropdown">
+          <img onclick="myFunction()" src="/img/user.png" alt="" class="dropbtn">
+              <div id="myDropdown" class="dropdown-content">
+                  <a th:href="@{~/user}">Users</a>
+                  <a th:href="@{~/}">Logout</a>
+              </div>
+
+          </div>
+             <a th:href="@{/html/cart}"><img src="/img/cart.png" alt=""></a>
+          </div>
+          </div>
+          <ul class="links-container">
+              <li class="link-item"><a th:href="@{/html/index}" class="link">home</a></li>
+              <li class="link-item"><a th:href="@{/html/laptops}" class="link">laptops & computers</a></li>
+              <li class="link-item"><a th:href="@{/html/smartphones}" class="link">smartphone</a></li>
+              <li class="link-item"><a th:href="@{/html/appliances}" class="link">home appliances</a></li>
+              <li class="link-item"><a th:href="@{/html/sellerpage}" class="link">sell</a></li>
+          </ul>
+      </div>
+      </nav>
+    </header>
+  </body>
+</html>
