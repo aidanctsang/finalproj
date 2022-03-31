@@ -15,4 +15,6 @@ public interface UserService {
     void update(UserDTO updatedUser);
 
     void delete(Long userID);
+
+    UserDTO validateUser(String email, String password);
 }

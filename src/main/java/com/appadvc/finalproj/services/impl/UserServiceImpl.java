@@ -2,9 +2,11 @@ package com.appadvc.finalproj.services.impl;
 
 import com.appadvc.finalproj.dto.UserDTO;
 import com.appadvc.finalproj.model.Users;
+import com.appadvc.finalproj.repository.RoleRepository;
 import com.appadvc.finalproj.repository.UserRepository;
 import com.appadvc.finalproj.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public List<UserDTO> list() {
         return StreamSupport.stream(userRepository.findAll().spliterator(), false)
@@ -26,7 +34,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void add(UserDTO user) {
-        userRepository.save(new Users(user));
+        Users users = new Users(user);
+        users.setRole(roleRepository.findByName(user.getRole()));
+        users.setPasswordHash(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(users);
     }
 
     @Override
@@ -42,5 +53,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Long userID) {
         userRepository.deleteById(userID);
+    }
+
+    @Override
+    public UserDTO validateUser(String email, String password) {
+        Users user = userRepository.findByEmail(email);
+
+        if (passwordEncoder.matches(password, user.getPasswordHash())) {
+            return new UserDTO(user);
+        } else {
+            return null;
+        }
     }
 }

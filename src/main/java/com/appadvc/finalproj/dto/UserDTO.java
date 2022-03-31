@@ -1,9 +1,7 @@
 package com.appadvc.finalproj.dto;
 
 import com.appadvc.finalproj.model.Users;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
@@ -16,15 +14,19 @@ public class UserDTO {
 
     private String password;
 
+    private String confirmPassword;
+
     private String address;
 
     private String email;
 
+    private String role;
+
     public UserDTO(Users user) {
         this.userID = user.getUserID();
         this.username = user.getUsername();
-        this.password = user.getPassword();
         this.address = user.getAddress();
         this.email = user.getEmail();
+        this.role = user.getRole().getName();
     }
 }
