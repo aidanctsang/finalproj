@@ -17,6 +17,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(customAuthenticationProvider);
+
     }
 
     @Override
@@ -27,15 +28,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
-                // Here, we are allowing access to the landing, and register pages to anonymous users only
-                // Added forgot password page
-                .antMatchers("/", "/login*", "/register*")
+                .antMatchers("/", "/login*", "/register*", "/css/**", "/js/**", "/img/**")
                 .anonymous()
-                // Here, we are allowing access to user pages to the admin role only
                 .antMatchers("/user*").hasRole("ADMIN")
-                // Here, we are allowing access to product pages to the admin and employee roles only
                 //.antMatchers("/product*").hasAnyRole("ADMIN", "EMPLOYEE")
-                // Any other requests should be authenticated
                 .anyRequest()
                 .authenticated()
                 .and()

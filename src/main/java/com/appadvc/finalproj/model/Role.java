@@ -18,4 +18,8 @@ public class Role {
 
     @OneToMany(mappedBy = "role", fetch = FetchType.EAGER)
     private Collection<Users> users;
+
+    public Role(String name) {
+        this.name = name;
+    }
 }

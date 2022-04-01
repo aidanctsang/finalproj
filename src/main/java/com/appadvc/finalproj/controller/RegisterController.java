@@ -20,7 +20,7 @@ public class RegisterController {
     @GetMapping
     private String index(Model model) {
         model.addAttribute("user", new UserDTO());
-        return "register/loginpage";
+        return "register/registerpage";
     }
 
     @PostMapping
