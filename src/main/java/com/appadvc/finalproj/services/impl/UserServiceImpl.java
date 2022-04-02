@@ -65,4 +65,16 @@ public class UserServiceImpl implements UserService {
             return null;
         }
     }
+
+    @Override
+    public boolean resetPassword(UserDTO user) {
+        Users userModel = userRepository.findByEmail(user.getEmail());
+
+        if (userModel == null) {
+            return false;
+        } else {
+            userRepository.updatePassword(userModel.getUserID(), passwordEncoder.encode(user.getPassword()));
+            return true;
+        }
+    }
 }

@@ -17,4 +17,6 @@ public interface UserService {
     void delete(Long userID);
 
     UserDTO validateUser(String email, String password);
+
+    boolean resetPassword(UserDTO user);
 }
