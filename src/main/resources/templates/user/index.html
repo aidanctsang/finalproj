@@ -12,7 +12,7 @@
     <title>Home</title>
   </head>
   <body>
-    <div th:replace="fragments/header :: header"></div>
+    <div th:replace="fragments/header :: headerAuthenticated"></div>
     <main>
       <div class="container">
         <h1 class="mt-5">User List</h1>
@@ -22,6 +22,8 @@
               <th>Username</th>
               <th>Address</th>
               <th>Email</th>
+              <th>User Type</th>
+              <th>Action</th>
             </tr>
           </thead>
 
@@ -30,6 +32,11 @@
               <td th:text="${user.getUsername()}"></td>
               <td th:text="${user.getAddress()}"></td>
               <td th:text="${user.getEmail()}"></td>
+              <td th:switch="${user.role}">
+                <span th:case="'ROLE_ADMIN'">Administrator</span>
+                <span th:case="'ROLE_SELLER'">Seller</span>
+                <span th:case="'ROLE_CUSTOMER'">Customer</span>
+              </td>
               <td>
                 <a
                   href
@@ -48,6 +55,5 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
-    <script th:src="@{/js/nav.js}"></script>
   </body>
 </html>

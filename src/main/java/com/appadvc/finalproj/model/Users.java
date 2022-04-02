@@ -24,28 +24,21 @@ public class Users {
     private String username;
 
     @Column(nullable = false)
+    private String passwordHash;
+
+    @Column(nullable = false)
     private String address;
 
     @Column(nullable = false, unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "users", cascade = CascadeType.REMOVE)
-    private List<Orders> orders;
-
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
-    @Column(nullable = false)
-    private String passwordHash;
+    @OneToMany(mappedBy = "users", cascade = CascadeType.REMOVE)
+    private List<Orders> orders;
 
-    @Column(updatable = false)
-    @CreationTimestamp
-    private LocalDateTime dateCreated;
-
-    @Column
-    @UpdateTimestamp
-    private LocalDateTime dateUpdated;
 
     public Users(Long userID) {
         this.userID = userID;
