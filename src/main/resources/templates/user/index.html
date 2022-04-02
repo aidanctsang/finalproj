@@ -34,7 +34,6 @@
               <td th:text="${user.getEmail()}"></td>
               <td th:switch="${user.role}">
                 <span th:case="'ROLE_ADMIN'">Administrator</span>
-                <span th:case="'ROLE_SELLER'">Seller</span>
                 <span th:case="'ROLE_CUSTOMER'">Customer</span>
               </td>
               <td>
