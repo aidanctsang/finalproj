@@ -16,11 +16,6 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long transactionID;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "orders_orderID")
-    private Orders orders;
-
     @Column(nullable = false)
     private float amount;
 
@@ -29,4 +24,8 @@ public class Transaction {
 
     @Column(updatable = false)
     private LocalDateTime paymentDate;
+
+    public Transaction() {
+
+    }
 }

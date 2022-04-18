@@ -36,9 +36,6 @@ public class Users {
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
-    @OneToMany(mappedBy = "users", cascade = CascadeType.REMOVE)
-    private List<Orders> orders;
-
 
     public Users(Long userID) {
         this.userID = userID;

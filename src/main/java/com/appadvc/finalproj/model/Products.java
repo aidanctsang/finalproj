@@ -1,7 +1,9 @@
 package com.appadvc.finalproj.model;
 
+import com.appadvc.finalproj.dto.ProductDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -9,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "products")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Products {
 
     @Id
@@ -31,7 +34,14 @@ public class Products {
     @JoinColumn(name = "categories_categoryID")
     private Categories categories;
 
-    @ManyToOne
-    @JoinColumn(name = "orders_orderID")
-    private Orders orders;
+    @Column
+    private String imageLocation;
+
+    public Products(ProductDTO productDTO) {
+        this.productID = productDTO.getProductid();
+        this.productName = productDTO.getProductname();
+        this.description = productDTO.getDescription();
+        this.qty = productDTO.getQuantity();
+        this.price = productDTO.getPrice();
+    }
 }
