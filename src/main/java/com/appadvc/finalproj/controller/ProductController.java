@@ -25,32 +25,32 @@ public class ProductController {
     @Autowired
     private FileStorageService fileStorageService;
 
-    @GetMapping("/productlist")
+    @GetMapping
     private String list(Model model) {
         model.addAttribute("products", productService.list());
-        return "productlist/index";
+        return "product/index";
     }
 
-    @GetMapping("/addform")
+    @GetMapping("/add")
     private String getProductAddForm(Model model) {
-        model.addAttribute("products", new ProductDTO());
-        return "productlist/sellerpage";
+        model.addAttribute("product", new ProductDTO());
+        return "product/sellerpage";
     }
 
-    @PostMapping("/add")
+    @PostMapping
     private String add(@Valid @ModelAttribute("product") ProductDTO product, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("product", product);
-            return "home/index";
+            return "product/sellerpage";
         }
         productService.add(product);
         return list(model);
     }
 
-    @GetMapping("/{id}")
-    private String get(@PathVariable Long id, Model model) {
-        model.addAttribute("product", productService.get(id));
-        return "productlist/view-product";
+    @GetMapping("/{productID}")
+    private String get(@PathVariable Long productID, Model model) {
+        model.addAttribute("product", productService.get(productID));
+        return "product/view-product";
     }
 
     @PutMapping
@@ -61,13 +61,13 @@ public class ProductController {
 
     @DeleteMapping
     private String delete(ProductDTO product, Model model) {
-        productService.delete(product.getProductid());
+        productService.delete(product.getProductID());
         return list(model);
     }
 
-    @GetMapping(value = "/{id}/image")
-    private ResponseEntity<Resource> getImage(@PathVariable Long id, Model model) throws IOException {
-        ProductDTO productDTO = productService.get(id);
+    @GetMapping(value = "/{productID}/image")
+    private ResponseEntity<Resource> getImage(@PathVariable Long productID, Model model) throws IOException {
+        ProductDTO productDTO = productService.get(productID);
         Resource resource = fileStorageService.load(productDTO.getImageLoc());
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)

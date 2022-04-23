@@ -1,7 +1,9 @@
 package com.appadvc.finalproj.model;
 
+import com.appadvc.finalproj.dto.CategoryDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "categories")
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 public class Categories {
 
     @Id
@@ -19,7 +21,8 @@ public class Categories {
     @Column(nullable = false)
     private String categoryName;
 
-    @OneToMany(mappedBy = "categories")
-    private List<Products> products;
-
+    public Categories (CategoryDTO categoryDTO) {
+        this.categoryID = categoryDTO.getCategoryID();
+        this.categoryName = categoryDTO.getCategoryName();
+    }
 }
